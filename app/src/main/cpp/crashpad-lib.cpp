@@ -29,7 +29,7 @@ void* thread_fun(void* );
 bool callback() {
     ALOGD("===============NativeCrashHandler.CRASH.DumpCallback================");
     pthread_t thread;
-    pthread_create(&thread, NULL, &thread_fun, nullptr);
+    pthread_create(&thread, NULL, &thread_fun, NULL);
     pthread_join(thread, NULL);
     return true;
 }
@@ -41,7 +41,7 @@ Java_com_github_zdy_crashpad_demo_MainActivity_initCrashPad(
         jstring path,
         jstring nativeLibDir
 ) {
-
+    env->GetJavaVM(&g_jvm);
     global_env = env;
     global_native_crash_handler = env->NewGlobalRef(object);
 
